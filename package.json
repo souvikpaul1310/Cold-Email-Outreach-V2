@@ -1,0 +1,19 @@
+{
+  "name": "google-maps-cold-lead-scraper",
+  "version": "1.0.0",
+  "description": "Custom Google Maps lead scraper with website email/owner enrichment and SEO/PPC/web-dev lead scoring. Built without any Apify Store actors.",
+  "type": "module",
+  "main": "src/main.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node test/extract.test.js && node test/maps.mock.test.js"
+  },
+  "dependencies": {
+    "apify": "^3.2.6",
+    "cheerio": "^1.0.0",
+    "crawlee": "^3.11.5",
+    "playwright": "*"
+  },
+  "license": "UNLICENSED"
+}
