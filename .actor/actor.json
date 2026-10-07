@@ -1,0 +1,14 @@
+{
+  "actorSpecification": 1,
+  "name": "google-maps-cold-lead-scraper",
+  "title": "Google Maps Cold Lead Scraper (Custom)",
+  "description": "Scrapes Google Maps for any business type in any location, visits each website to find emails, owner names and socials, audits the site for SEO/PPC/web gaps and scores every lead for cold outreach.",
+  "version": "1.0",
+  "buildTag": "latest",
+  "meta": { "templateId": "js-crawlee-playwright-chrome" },
+  "input": "./input_schema.json",
+  "dockerfile": "./Dockerfile",
+  "storages": { "dataset": "./dataset_schema.json" },
+  "defaultMemoryMbytes": 4096,
+  "minMemoryMbytes": 2048
+}

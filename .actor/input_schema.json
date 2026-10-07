@@ -1,0 +1,150 @@
+{
+  "title": "Google Maps Cold Lead Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchTerms": {
+      "title": "🔍 What businesses to target",
+      "type": "array",
+      "description": "Business types / keywords as you would type them into Google Maps, e.g. \"dentist\", \"plumber\", \"real estate agency\", \"restaurant\". One search runs per term per location.",
+      "editor": "stringList",
+      "prefill": [
+        "dentist"
+      ],
+      "sectionCaption": "Search"
+    },
+    "locations": {
+      "title": "📍 Locations",
+      "type": "array",
+      "description": "Any city, neighbourhood, region or postal code, e.g. \"Toronto, ON, Canada\", \"Salt Lake, Kolkata\", \"Austin, TX\", \"M5V 2T6\".",
+      "editor": "stringList",
+      "prefill": [
+        "Toronto, ON, Canada"
+      ]
+    },
+    "maxPlacesPerSearch": {
+      "title": "Max businesses per search term & location",
+      "type": "integer",
+      "description": "Google Maps shows ~120 results per search. Turn on Deep search below to go beyond that for big cities.",
+      "default": 40,
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "deepSearch": {
+      "title": "Deep search (split location into a grid)",
+      "type": "boolean",
+      "description": "Geocodes the location and searches every cell of a grid, to collect far more than 120 businesses in large cities. Slower and uses more compute.",
+      "default": false
+    },
+    "gridSize": {
+      "title": "Grid size for deep search",
+      "type": "integer",
+      "description": "3 = 3×3 = 9 searches per term/location. Use 4–6 for large metros.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 10
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Google Maps interface language. Keep \"en\" — the parser is tuned for English labels.",
+      "default": "en",
+      "editor": "textfield"
+    },
+    "skipClosedPlaces": {
+      "title": "Skip closed businesses",
+      "type": "boolean",
+      "description": "Skip places marked permanently or temporarily closed.",
+      "default": true
+    },
+    "scrapeWebsites": {
+      "title": "Visit websites for emails, owner names & audit",
+      "type": "boolean",
+      "description": "Visits each business website (homepage + About/Team/Contact pages) to find emails, owner / founder names, social profiles, and SEO/PPC/web gaps.",
+      "default": true,
+      "sectionCaption": "Lead enrichment"
+    },
+    "maxPagesPerWebsite": {
+      "title": "Max pages per website",
+      "type": "integer",
+      "description": "Homepage plus the most relevant About / Team / Contact pages.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 15
+    },
+    "onlyWithEmail": {
+      "title": "Only save leads that have an email",
+      "type": "boolean",
+      "default": false,
+      "sectionCaption": "Lead filters",
+      "description": "Only save businesses where at least one email address was found."
+    },
+    "onlyWithoutWebsite": {
+      "title": "Only save businesses WITHOUT a website",
+      "type": "boolean",
+      "description": "Great for pure web-development outreach (phone outreach mostly, since these rarely have emails).",
+      "default": false
+    },
+    "minLeadScore": {
+      "title": "Minimum lead score (0–100)",
+      "type": "integer",
+      "description": "Higher score = bigger marketing gap and easier to reach. 55+ = Hot, 35+ = Warm.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 100
+    },
+    "maxRating": {
+      "title": "Only businesses rated at or below",
+      "type": "number",
+      "description": "Optional. e.g. 4.2 to focus on businesses that need reputation / local SEO help.",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "excludeKeywords": {
+      "title": "Exclude businesses containing",
+      "type": "array",
+      "description": "Skip chains or irrelevant results by name/category, e.g. \"Walmart\", \"Tim Hortons\", \"ATM\".",
+      "editor": "stringList",
+      "default": []
+    },
+    "proxyConfiguration": {
+      "title": "Proxy configuration",
+      "type": "object",
+      "description": "Google blocks heavy scraping. Apify Proxy (RESIDENTIAL recommended for large runs) keeps it stable.",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Advanced"
+    },
+    "maxConcurrency": {
+      "title": "Browser concurrency (Google Maps)",
+      "type": "integer",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 20,
+      "description": "How many Google Maps browser pages to process in parallel. Raise together with memory."
+    },
+    "websiteMaxConcurrency": {
+      "title": "HTTP concurrency (websites)",
+      "type": "integer",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 50,
+      "description": "How many business websites to fetch in parallel."
+    },
+    "headless": {
+      "title": "Headless browser",
+      "type": "boolean",
+      "default": true,
+      "description": "Run Chrome without a visible window. Keep enabled on Apify."
+    }
+  },
+  "required": [
+    "searchTerms",
+    "locations"
+  ]
+}
